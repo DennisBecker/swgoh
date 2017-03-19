@@ -19,10 +19,16 @@ class FileManager
 		}
 
 		if (!file_exists($filePath)) {
-			throw new \InvalidArgumentException(sprintf('File %s does not exist', basename($filePath)));
+			throw new \UnexpectedValueException(sprintf('File %s does not exist', basename($filePath)));
 		}
 
-		return json_decode(file_get_contents($filePath));
+		$content = file_get_contents($filePath);
+
+		if (empty($content)) {
+			return [];
+		}
+
+		return json_decode(file_get_contents($filePath), true);
 	}
 
 	public function write(string $filePath, array $data)

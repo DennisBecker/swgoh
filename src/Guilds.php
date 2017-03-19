@@ -27,6 +27,8 @@ class Guilds
 			if (preg_match('/^\/g\/\d+\/.*/', $href)) {
 		    	$guildUris[] = $href;
 			}
+
+			break;
 		}
 
 		$guildHtmlData = $this->client->fetchAll($guildUris);

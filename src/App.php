@@ -11,49 +11,36 @@ class App
 
 	public function run()
 	{
+		$begin = microtime();
 		$this->client = new Client;
 
 		$this->load();
-	}
 
-	private function load()
-	{
-		$guilds = new Guilds($this->client);
-		$guildData = $guilds->fetch();
+		ksort($this->data);
 
-		$this->output(sprintf('Guilds: %d', count($this->data)));
-
-		foreach ($guildData as $guild) {
-			$this->output(sprintf("\nNAME: %s", $guild['name']));
-
-			$this->loadMember($guild);
+		foreach ($this->data as &$data) {
+			usort($data, function($a, $b) {
+				return $a['count'] <=> $b['count'];
+			});
 		}
 
 		$fileManager = new FileManager();
 		$fileManager->write(dirname(__DIR__) . '/data/characters.json', $this->data);
+
+		printf("Time: %d", microtime()-$begin);
+		printf("Memory Usage: %d", memory_get_peak_usage(true)/1024/1024);
 	}
 
-	private function loadMember($guild)
+	private function load()
 	{
-		$member = new Member($this->client);
-		$members = $member->fetch($guild);
-
-		$this->output(sprintf('MEMBER: %d', count($members)));
-
-		$guild['members'] = $members;
-
-		foreach ($guild['members'] as $member) {
-
-			$this->loadCollection($member);
-		}
-	}
-
-	private function loadCollection(&$member)
-	{
+		$collectionLeaderboard = new CollectionLeaderboard($this->client);
+		$playerUrls = $collectionLeaderboard->getPlayers();
+		
 		$collection = new Collection($this->client);
-		$charUris = $collection->fetch($member);
+		$characterUrls = $collection->getCharacters($playerUrls);
 
-		$charData = $this->loadCharacters($charUris);
+		$characters = new Characters($this->client);
+		$charData = $characters->fetch($characterUrls);
 
 		foreach ($charData as $char)
 		{
@@ -70,19 +57,32 @@ class App
 				];
 			}
 
-			$this->data[$char['name']]['mods']['slot1'][] = $char['mods']['slot1'];
-			$this->data[$char['name']]['mods']['slot2'][] = $char['mods']['slot2'];
-			$this->data[$char['name']]['mods']['slot3'][] = $char['mods']['slot3'];
-			$this->data[$char['name']]['mods']['slot4'][] = $char['mods']['slot4'];
-			$this->data[$char['name']]['mods']['slot5'][] = $char['mods']['slot5'];
-			$this->data[$char['name']]['mods']['slot6'][] = $char['mods']['slot6'];
+			$this->addMod($this->data[$char['name']]['mods']['slot1'], $char['mods']['slot1']);
+			$this->addMod($this->data[$char['name']]['mods']['slot2'], $char['mods']['slot2']);
+			$this->addMod($this->data[$char['name']]['mods']['slot3'], $char['mods']['slot3']);
+			$this->addMod($this->data[$char['name']]['mods']['slot4'], $char['mods']['slot4']);
+			$this->addMod($this->data[$char['name']]['mods']['slot5'], $char['mods']['slot5']);
+			$this->addMod($this->data[$char['name']]['mods']['slot6'], $char['mods']['slot6']);
 		}
 	}
 
-	private function loadCharacters($charUris)
+	private function addMod(&$storedMods, $newMod)
 	{
-		$characters = new Characters($this->client);
-		return $characters->fetch($charUris);
+		if (!array_key_exists('name', $mod)) {
+			return;
+		}
+
+		$found = false;
+		foreach ($storedMods as &$mod) {
+			if ($mod == $newMod) {
+				++$mod['count'];
+				$found = true;
+			}
+		}
+
+		if (!$found) {
+			$storedMods[] = array_merge($newMod, ['count' => 1]);
+		}
 	}
 
 	public function output(string $message)

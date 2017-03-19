@@ -18,9 +18,10 @@ class Characters
 	{
 		$charsHtmlData = $this->client->fetchAll($charUris);
 
+		printf("\n\nCharacters: %d\n\n", count($charsHtmlData));
+
 		$chars = [];
 		foreach($charsHtmlData as $index => $html) {
-			var_dump($charUris[$index]);
 			$crawler = new Crawler($html);
 
 			$chars[] = [
@@ -45,9 +46,7 @@ class Characters
 		try {
 			return [
 				'name' => $crawler->filter(".pc-statmod-slot$slot .statmod-title")->text(),
-				'stats' => [
-					'primary' => $crawler->filter(".pc-statmod-slot$slot .statmod-stats-1 .statmod-stat-label")->text(),
-				],
+				'primary' => $crawler->filter(".pc-statmod-slot$slot .statmod-stats-1 .statmod-stat-label")->text(),
 			];
 		} catch (\Exception $e) {
 			return [];

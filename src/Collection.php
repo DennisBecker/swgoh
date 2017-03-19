@@ -14,6 +14,50 @@ class Collection
 		$this->client = $client;
 	}
 
+	public function getCharacters($playerUrls)
+	{
+		$characterUrls = [];
+
+		$collectionPagesHtml = $this->client->fetchAll($playerUrls);
+
+		printf("\n\nCollections: %d\n\n", count($collectionPagesHtml));
+
+		 foreach ($collectionPagesHtml as $html) {
+            $crawler = new Crawler($html);
+
+			foreach ($crawler->filter('.char-portrait-full-link') as $toon) {
+				$divs = $toon->getElementsByTagName('div');
+				$level = (int)$divs->item(8)->nodeValue;
+				$gear = $this->getNormalizedRomanianNumber($divs->item(9)->nodeValue);
+				
+				if ($gear > 7) {
+					$characterUrls[] = $toon->getAttribute('href');
+				}
+			}
+		 }
+
+		 return $characterUrls;
+	}
+
+	private function getNormalizedRomanianNumber($value)
+	{
+		$gearLevels = [
+			'I' => 1,
+			'II' => 2,
+			'III' => 3,
+			'IV' => 4,
+			'V' => 5,
+			'VI' => 6,
+			'VII' => 7,
+			'VIII' => 8,
+			'IX' => 9,
+			'X' => 10,
+			'XI' => 11,
+		];
+
+		return $gearLevels[$value];
+	}
+
 	public function fetch($member)
 	{
 		$html = $this->client->fetch($member);
