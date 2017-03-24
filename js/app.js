@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function loadCharacters() {
-	$.ajax('/data/characters.json')
+	$.ajax('./data/characters.json')
 	.done(function (data) {
 		displayCharacterData(data);
 	});
