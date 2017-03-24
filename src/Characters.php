@@ -16,11 +16,14 @@ class Characters
 
 	public function fetch(array $charUris)
 	{
+		printf("\n\nCharacters: %d\n\n", count($charUris));
+
 		$charsHtmlData = $this->client->fetchAll($charUris);
 
-		printf("\n\nCharacters: %d\n\n", count($charsHtmlData));
+		printf("\n\nFetched data of %d Characters\n\n", count($charsHtmlData));
 
 		$chars = [];
+		$counter = 0;
 		foreach($charsHtmlData as $index => $html) {
 			$crawler = new Crawler($html);
 
@@ -36,6 +39,13 @@ class Characters
 					'slot6' => $this->getModInfo($crawler, 6),
 				],
 			];
+
+			echo ".";
+			++$counter;
+
+			if ($counter % 60 === 0) {
+				printf("  %10d\n", $counter);
+			}
 		}
 
 		return $chars;
@@ -44,8 +54,17 @@ class Characters
 	private function getModInfo($crawler, $slot)
 	{
 		try {
+			$name = $crawler->filter(".pc-statmod-slot$slot .statmod-title")->text();
+
+			$pattern = '/(?:Critical Chance|Critical Damage|Defense|Health|Offense|Potency|Speed|Tenacity)/';
+			$result = preg_match($pattern, $name, $matches);
+
+			if ($result === 0 || $result === false) {
+				throw new UnexpectedValueException("");
+			}
+
 			return [
-				'name' => $crawler->filter(".pc-statmod-slot$slot .statmod-title")->text(),
+				'name' => $matches[0],
 				'primary' => $crawler->filter(".pc-statmod-slot$slot .statmod-stats-1 .statmod-stat-label")->text(),
 			];
 		} catch (\Exception $e) {

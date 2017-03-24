@@ -11,31 +11,42 @@ class App
 
 	public function run()
 	{
-		$begin = microtime();
-		$this->client = new Client;
+		ini_set("memory_limit","-1");
+
+		$begin = microtime(true);
+		$this->client = new Client();
+		$fileManager = new FileManager();
 
 		$this->load();
+		// $this->data = $fileManager->read(dirname(__DIR__) . '/data/characters.json');
 
 		ksort($this->data);
 
 		foreach ($this->data as &$data) {
-			usort($data, function($a, $b) {
-				return $a['count'] <=> $b['count'];
-			});
+			foreach ($data['mods'] as &$mods) {
+				usort($mods, function($a, $b) {
+					return $b['count'] <=> $a['count'];
+				});
+			}
 		}
 
-		$fileManager = new FileManager();
+		foreach ($this->data as &$data) {
+			foreach ($data['mods'] as $slot => $mods) {
+				$data['mods'][$slot] = array_slice($mods, 0, 5);
+			}
+		}
+
 		$fileManager->write(dirname(__DIR__) . '/data/characters.json', $this->data);
 
-		printf("Time: %d", microtime()-$begin);
-		printf("Memory Usage: %d", memory_get_peak_usage(true)/1024/1024);
+		printf("\n\nTime: %d\n", microtime(true)-$begin);
+		printf("Memory Usage: %d\n\n", memory_get_peak_usage(true)/1024/1024);
 	}
 
 	private function load()
 	{
 		$collectionLeaderboard = new CollectionLeaderboard($this->client);
 		$playerUrls = $collectionLeaderboard->getPlayers();
-		
+
 		$collection = new Collection($this->client);
 		$characterUrls = $collection->getCharacters($playerUrls);
 
@@ -66,22 +77,23 @@ class App
 		}
 	}
 
-	private function addMod(&$storedMods, $newMod)
+	private function addMod(&$storedMods, $mod)
 	{
 		if (!array_key_exists('name', $mod)) {
 			return;
 		}
 
 		$found = false;
-		foreach ($storedMods as &$mod) {
-			if ($mod == $newMod) {
-				++$mod['count'];
+		foreach ($storedMods as &$storedMod) {
+			if ($storedMod['name'] === $mod['name'] && $storedMod['primary'] === $mod['primary']) {
+				++$storedMod['count'];
 				$found = true;
+				break;
 			}
 		}
 
 		if (!$found) {
-			$storedMods[] = array_merge($newMod, ['count' => 1]);
+			$storedMods[] = array_merge($mod, ['count' => 1]);
 		}
 	}
 

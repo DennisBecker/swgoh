@@ -8,14 +8,20 @@ use GuzzleHttp\Pool;
 
 class Client
 {
+	private $sleepTimer = 0;
+
 	public function __construct()
 	{
-		$this->client = new GuzzleClient(['base_uri' => 'https://swgoh.gg']);
+		$this->client = new GuzzleClient([
+			'base_uri' => 'https://swgoh.gg',
+		]);
 	}
 
 	public function fetch($uri)
 	{
 		$res = $this->client->request('GET', $uri);
+
+		sleep($this->sleepTimer);
 
 		return (string)$res->getBody();
 	}
@@ -35,6 +41,8 @@ class Client
 		$pool = new Pool($this->client, $requestPromises, [
 		    'concurrency' => 20,
 		    'fulfilled' => function ($response, $index) use (&$data, &$counter) {
+				sleep($this->sleepTimer);
+
 				echo ".";
 				++$counter;
 

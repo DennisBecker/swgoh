@@ -18,9 +18,9 @@ class Collection
 	{
 		$characterUrls = [];
 
-		$collectionPagesHtml = $this->client->fetchAll($playerUrls);
+		printf("\n\nCollections: %d\n\n", count($playerUrls));
 
-		printf("\n\nCollections: %d\n\n", count($collectionPagesHtml));
+		$collectionPagesHtml = $this->client->fetchAll($playerUrls);
 
 		 foreach ($collectionPagesHtml as $html) {
             $crawler = new Crawler($html);
@@ -29,8 +29,8 @@ class Collection
 				$divs = $toon->getElementsByTagName('div');
 				$level = (int)$divs->item(8)->nodeValue;
 				$gear = $this->getNormalizedRomanianNumber($divs->item(9)->nodeValue);
-				
-				if ($gear > 7) {
+
+				if ($level == 85 && $gear >= 10) {
 					$characterUrls[] = $toon->getAttribute('href');
 				}
 			}
