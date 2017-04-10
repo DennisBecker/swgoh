@@ -37,6 +37,6 @@ class FileManager
 			throw new \InvalidArgumentException(sprintf('File lookup %s does not match %s', $filePath, FileManager::$DATA_DIR));
 		}
 
-		file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT));
+		file_put_contents($filePath, json_encode($data));
 	}
 }
