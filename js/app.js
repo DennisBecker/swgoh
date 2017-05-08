@@ -14,7 +14,7 @@ function displayCharacterData(data) {
 
 	let characterMods = [];
 	$.each(data, function (name, character) {
-		let stringify = '<h2>' + name + '</h2>';
+		let stringify = '<h3>' + name + '</h3>';
 		stringify += '<table>';
 		stringify += '<thead><tr><th>Square</th><th>Arrow</th><th>Diamond</th><th>Triangle</th><th>Circle</th><th>Plus</th></tr></thead>'
 		stringify += '<tbody>';
