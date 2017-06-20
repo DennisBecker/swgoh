@@ -60,7 +60,7 @@ class Characters
 			$result = preg_match($pattern, $name, $matches);
 
 			if ($result === 0 || $result === false) {
-				throw new UnexpectedValueException("");
+				throw new \UnexpectedValueException("no mod found");
 			}
 
 			return [
