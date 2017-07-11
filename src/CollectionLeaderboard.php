@@ -24,7 +24,7 @@ class CollectionLeaderboard
         $crawler = new Crawler($html);
         $pagesElement = $crawler->filter('.pagination a');
         $pages = str_replace('Page 1 of ', '', $pagesElement->text());
-        $pages = 10;
+        $pages = 15;
 
         $leaderboardPages = [];
         for ($page = 1; $page <= $pages; $page++) {
