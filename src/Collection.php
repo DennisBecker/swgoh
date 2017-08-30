@@ -18,7 +18,8 @@ class Collection
 	{
 		$characterUrls = [];
 
-		printf("\n\nCollections: %d\n\n", count($playerUrls));
+		$countPlayers = count($playerUrls);
+		printf("\n\nCollections: %d\n\n", $countPlayers);
 
 		$collectionPagesHtml = $this->client->fetchAll($playerUrls);
 
@@ -30,13 +31,13 @@ class Collection
 				$level = (int)$divs->item(8)->nodeValue;
 				$gear = $this->getNormalizedRomanianNumber($divs->item(9)->nodeValue);
 
-				if ($level == 85 && $gear >= 10) {
+				if ($level >= 85 && $gear >= 10) {
 					$characterUrls[] = $toon->getAttribute('href');
 				}
 			}
-		 }
+		}
 
-		 return $characterUrls;
+		return $characterUrls;
 	}
 
 	private function getNormalizedRomanianNumber($value)
@@ -53,6 +54,7 @@ class Collection
 			'IX' => 9,
 			'X' => 10,
 			'XI' => 11,
+			'XII' => 12,
 		];
 
 		return $gearLevels[$value];

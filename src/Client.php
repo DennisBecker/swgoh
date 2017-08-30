@@ -37,17 +37,18 @@ class Client
 		})();
 
 		$data = [];
+		$countUris = count($uris);
 		$counter = 0;
 		$pool = new Pool($this->client, $requestPromises, [
 		    'concurrency' => 20,
-		    'fulfilled' => function ($response, $index) use (&$data, &$counter) {
+		    'fulfilled' => function ($response, $index) use (&$data, &$counter, $countUris) {
 				sleep($this->sleepTimer);
 
 				echo ".";
 				++$counter;
 
                 if ($counter % 60 === 0) {
-                    printf("  %10d\n", $counter);
+                    printf("  %10d / %d\n", $counter, $countUris);
                 }
 
 		        $data[] = (string)$response->getBody();

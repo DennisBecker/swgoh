@@ -17,14 +17,12 @@ class CollectionLeaderboard
     public function getPlayers()
     {
         $playerUrls = [];
-        $start = microtime(true);
         $html = $this->client->fetch('/sync/leaderboard/collection/');
-        printf("%d seconds\n\n", microtime(true)-$start);
 
         $crawler = new Crawler($html);
         $pagesElement = $crawler->filter('.pagination a');
         $pages = str_replace('Page 1 of ', '', $pagesElement->text());
-        $pages = 15;
+        $pages = 20;
 
         $leaderboardPages = [];
         for ($page = 1; $page <= $pages; $page++) {
@@ -38,19 +36,8 @@ class CollectionLeaderboard
         foreach ($leaderboardPagesHtml as $html) {
             $crawler = new Crawler($html);
             foreach ($crawler->filter('tbody > tr') as $playerData) {
-                $elements = $playerData->getElementsByTagName('td');
-
-                $gear8 = (int)$elements[8]->nodeValue;
-                $gear9 = (int)$elements[7]->nodeValue;
-                $gear10 = (int)$elements[6]->nodeValue;
-                $gear11 = (int)$elements[5]->nodeValue;
-
-                $highGearToons = $gear8 + $gear9 + $gear10 + $gear11;
-
-                if ($highGearToons > 0) {
-                    $url = $elements[1]->getElementsByTagName('a')[0]->getAttribute('href');
-                    $playerUrls[] = $url . 'collection/';
-                }
+                $url = $playerData->getElementsByTagName('td')[0]->getElementsByTagName('a')[0]->getAttribute('href');
+                $playerUrls[] = $url . 'collection/';
             }
         }
 
