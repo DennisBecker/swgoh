@@ -48,7 +48,7 @@ class App
 		$playerUrls = $collectionLeaderboard->getPlayers();
 
 		$collection = new Collection($this->client);
-		$characterUrls = $collection->getCharacters($playerUrls);
+		$characterUrls = $collection->getCharacterUrls($playerUrls);
 
 		$characters = new Characters($this->client);
 		$charData = $characters->fetch($characterUrls);

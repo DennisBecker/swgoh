@@ -14,7 +14,7 @@ class Collection
 		$this->client = $client;
 	}
 
-	public function getCharacters($playerUrls)
+	public function getCharacterUrls($playerUrls)
 	{
 		$characterUrls = [];
 
@@ -28,6 +28,15 @@ class Collection
 
 			foreach ($crawler->filter('.char-portrait-full-link') as $toon) {
 				$divs = $toon->getElementsByTagName('div');
+
+				$starLevel = 0;
+				foreach ($divs as $div) {
+					$classes = $div->getAttribute('class');
+					if (strpos($classes, 'star') === 0 && strpos($classes, 'star-inactive') === false) {
+						++$starLevel;
+					}
+				}
+
 				$level = (int)$divs->item(8)->nodeValue;
 				$gear = $this->getNormalizedRomanianNumber($divs->item(9)->nodeValue);
 
@@ -38,6 +47,60 @@ class Collection
 		}
 
 		return $characterUrls;
+	}
+
+	public function getCharacterData($playerUrls)
+	{
+		$playerCharacters = [];
+
+		$countPlayers = count($playerUrls);
+		printf("\n\nCollections: %d\n\n", $countPlayers);
+
+		$collectionPagesHtml = $this->client->fetchAll($playerUrls);
+
+		 foreach ($collectionPagesHtml as $html) {
+            $crawler = new Crawler($html);
+			$playerName = '';
+
+			foreach ($crawler->filter('.char-name') as $playerData) {
+				$playerName = $playerData->nodeValue;
+				break;
+			}
+
+			foreach ($crawler->filter('.collection-char') as $toon) {
+				$starLevel = 0;
+				$level = 0;
+				$gear = 0;
+
+				$node = new Crawler();
+				$node->addNode($toon);
+
+				$charName = $node->filter('.collection-char-name')->text();
+
+				$stars = $node->filter('.star');
+				if (isset($stars) && count($stars) > 0) {
+					$stars->each(function(Crawler $toonStars) use (&$starLevel) {
+						$classes = $toonStars->extract('class')[0];
+						if (strpos($classes, 'star') === 0 && strpos($classes, 'star-inactive') === false) {
+							++$starLevel;
+						}
+					});
+
+					$level = (int)$node->filter('.char-portrait-full-level')->text();
+					$gearLevel = $node->filter('.char-portrait-full-gear-level')->text();
+
+					$gear = $this->getNormalizedRomanianNumber($gearLevel);
+				}
+
+				$playerCharacters[$playerName][$charName] = [
+					'stars' => $starLevel,
+					'level' => $level,
+					'gear' => $gear,
+				];
+			}
+		}
+
+		return $playerCharacters;
 	}
 
 	private function getNormalizedRomanianNumber($value)

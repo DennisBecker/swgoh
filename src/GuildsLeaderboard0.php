@@ -5,7 +5,7 @@ namespace SWGoH;
 
 use Symfony\Component\DomCrawler\Crawler;
 
-class Guilds
+class GuildsLeaderboard
 {
 	public function __construct(Client $client)
 	{

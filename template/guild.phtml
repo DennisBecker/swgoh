@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><?php echo $guildName ?></title>
+	<style>
+		body {
+			font-family: Arial;
+			font-size: 14px;
+		}
+		table {
+			border-collapse: collapse;
+		}
+
+		td, th {
+			width: 145px;
+			border-left: 1px solid black;
+		}
+
+		th {
+			background-color: #2980b9;
+			color: white;
+		}
+
+		tbody tr:nth-child(2n+2) {
+			background-color: #CCCCCC;
+		}
+
+		tbody td {
+			padding: 5px;
+		}
+
+		td:first-child, th:first-child {
+			border-left: none;
+		}
+	</style>
+</head>
+<body>
+	<h1><?php echo $guildName ?></h1>
+	<?php foreach ($sortedCharacters as $characterName => $playerChars) : ?>
+		<h2><?php echo $characterName; ?></h2>
+		<table>
+			<thead>
+				<th>Player</th>
+				<th>Stars</th>
+				<th>Level</th>
+				<th>Gear</th>
+			</thead>
+			<tbody>
+				<?php foreach ($playerChars as $playerChar) : ?>
+				<tr>
+					<td><?php echo $playerChar['player']; ?></td>
+					<td><?php echo $playerChar['stars']; ?></td>
+					<td><?php echo $playerChar['level']; ?></td>
+					<td><?php echo $playerChar['gear']; ?></td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	<?php endforeach; ?>
+</body>
+</html>
