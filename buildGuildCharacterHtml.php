@@ -32,12 +32,12 @@ ksort($sortedCharacters);
 
 foreach($sortedCharacters as &$character) {
 	usort($character, function($a, $b) {
-		$starDiff = $b['stars'] - $a['stars'];
+		$starDiff = $a['stars'] - $b['stars'];
 		if ($starDiff === 0) {
-			$levelDiff = $b['level'] - $a['level'];
+			$levelDiff = $a['level'] - $b['level'];
 
 			if ($levelDiff === 0) {
-				return $b['gear'] - $a['gear'];
+				return $a['gear'] - $b['gear'];
 			}
 
 			return $levelDiff;
