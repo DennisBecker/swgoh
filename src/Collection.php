@@ -7,6 +7,9 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class Collection
 {
+	/**
+	 * @var Client
+	 */
 	private $client;
 
 	public function __construct($client)

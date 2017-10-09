@@ -58,6 +58,8 @@ class Client
 		$promise = $pool->promise();
 		$promise->wait();
 
+		printf("\nFetched %d URLs\n", count($data));
+
 		return $data;
 	}
 }
