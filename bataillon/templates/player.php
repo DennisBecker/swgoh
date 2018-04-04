@@ -90,6 +90,27 @@
 			<?php echo character('Stormtrooper', $characters); ?>
 			</tbody>
 		</table>
+
+		<h6>Bounty Hunter</h6>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Character</th>
+				<th>Star</th>
+				<th>Level</th>
+				<th>Gear</th>
+				<th>Ready?</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php echo character('Boba Fett', $characters); ?>
+			<?php echo character('Cad Bane', $characters); ?>
+			<?php echo character('Dengar', $characters); ?>
+			<?php echo character('Greedo', $characters); ?>
+			<?php echo character('IG-88', $characters); ?>
+			<?php echo character('Zam Wesell', $characters); ?>
+			</tbody>
+		</table>
 	</div>
 
 	<div class="col-4">
