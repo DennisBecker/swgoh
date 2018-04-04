@@ -22,7 +22,7 @@
 			</tbody>
 		</table>
 
-		<h5>Rogue One</h5>
+		<h6>Rogue One</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -45,7 +45,7 @@
 			</tbody>
 		</table>
 
-		<h5>Phoenix</h5>
+		<h6>Phoenix</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -58,7 +58,7 @@
 			</thead>
 			<tbody>
 			<?php echo character('Hera Syndulla', $characters); ?>
-			<?php echo character('Garazeb "Zeb" Orrelio', $characters); ?>
+			<?php echo character('Garazeb "Zeb" Orrelios', $characters); ?>
 			<?php echo character('Ezra Bridger', $characters); ?>
 			<?php echo character('Chopper', $characters); ?>
 			<?php echo character('Sabine Wren', $characters); ?>
@@ -68,8 +68,8 @@
 	</div>
 
 	<div class="col-4">
-		<h4>Dark Side Territory Battle</h4>
-		<h5>Imperial Trooper</h5>
+		<h5>Dark Side Territory Battle</h5>
+		<h6>Imperial Trooper</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -93,7 +93,7 @@
 	</div>
 
 	<div class="col-4">
-		<h4>Sith Raid</h4>
+		<h5>Sith Raid</h5>
 		<table class="table">
 			<thead>
 			<tr>
