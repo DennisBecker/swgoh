@@ -23,12 +23,18 @@ $guilds = [
 ];
 
 function get($client, $uri) {
-	return (string)$client->request('GET', $uri)->getBody());
+	printf('Fetching %s' . PHP_EOL, $uri);
+	return (string)$client->request('GET', $uri)->getBody();
 }
 
 $characters = get($client,'/api/characters');
 file_put_contents('bataillon/characters.json', $characters);
 
+$ships = get($client,'/api/ships/');
+file_put_contents('bataillon/ships.json', $ships);
 
-$units = get($client,'/api/guilds/18908/units/');
-var_dump($units);
+
+foreach ($guilds as $name => $uri) {
+	$units = get($client,$uri);
+	file_put_contents('bataillon/' . preg_replace('/ /', '', $name) . '.json', $units);
+}

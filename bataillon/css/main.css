@@ -1,0 +1,15 @@
+body {
+	font-size: 11px;
+}
+
+.ready {
+	background-color: rgb(135, 220, 103);
+}
+
+.usable {
+	background-color: rgb(222, 207, 98);
+}
+
+.notReady {
+	background-color: rgb(224, 125, 134);
+}
