@@ -61,6 +61,7 @@ foreach ($guilds as $name) {
 }
 
 $html = '';
+$sithRaid = '';
 foreach ($players as $playerName => $playerData) {
 	$guild = $playerData['guild'];
 	$characters = $playerData['characters'];
@@ -70,11 +71,21 @@ foreach ($players as $playerName => $playerData) {
 	include 'bataillon/templates/player.php';
 	$playerHtml = ob_get_clean();
 	$html .= $playerHtml;
+
+	ob_start();
+	include 'bataillon/templates/heroicSithRaid.php';
+	$playerHtml = ob_get_clean();
+	$sithRaid .= $playerHtml;
 }
 
 ob_start();
 include 'bataillon/templates/index.php';
 file_put_contents('bataillon/index.html', ob_get_clean());
+
+$html = $sithRaid;
+ob_start();
+include 'bataillon/templates/index.php';
+file_put_contents('bataillon/sith.html', ob_get_clean());
 
 function character($name, $charArray) {
 	$rarityClass = '';
@@ -111,6 +122,45 @@ function character($name, $charArray) {
 		$gearClass = 'notReady';
 	} else {
 		$gearClass = 'usable';
+	}
+
+	$readyClass = in_array('notReady', [$rarityClass, $levelClass, $gearClass]) ? 'notReady' : 'usable';
+	if ($rarityClass === 'ready' && $levelClass === 'ready' && $gearClass === 'ready') {
+		$readyClass = 'ready';
+	}
+
+	return '<tr><td class="">' . $name .'</td><td class="'.$rarityClass.'">' . $char['rarity'] .'</td><td class="'.$levelClass.'">' . $char['level'] .'</td><td class="'.$gearClass.'">' . $char['gear_level'] .'</td><td class="'.$readyClass.'">'.($readyClass === 'ready' ? 'yes' : 'no').'</td></tr>'."\n";
+}
+
+function heroicCharacter($name, $charArray) {
+	$rarityClass = '';
+
+	$char = [
+		'rarity' => 0,
+		'level' => 0,
+		'gear_level' => 0,
+	];
+
+	if (isset($charArray[$name])) {
+		$char = $charArray[$name];
+	}
+
+	if ($char['rarity'] == 7) {
+		$rarityClass = 'ready';
+	} else {
+		$rarityClass = 'notReady';
+	}
+
+	if ($char['level'] == 85) {
+		$levelClass = 'ready';
+	} else {
+		$levelClass = 'notReady';
+	}
+
+	if ($char['gear_level'] > 10) {
+		$gearClass = 'ready';
+	} else {
+		$gearClass = 'notReady';
 	}
 
 	$readyClass = in_array('notReady', [$rarityClass, $levelClass, $gearClass]) ? 'notReady' : 'usable';
