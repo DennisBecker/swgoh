@@ -13,3 +13,7 @@ body {
 .notReady {
 	background-color: rgb(224, 125, 134);
 }
+
+.unavailable {
+	background-color: rgb(224, 224, 224);
+}

@@ -49,6 +49,13 @@ foreach ($guilds as $name) {
 					'gear_level' => $playerData['gear_level'],
 				];
 			}
+
+			if ($playerData['combat_type'] === 2) {
+				$players[$playerData['player']]['ships'][$unitName] = [
+					'rarity' => $playerData['rarity'],
+					'level' => $playerData['level'],
+				];
+			}
 		}
 	};
 }
@@ -57,7 +64,7 @@ $html = '';
 foreach ($players as $playerName => $playerData) {
 	$guild = $playerData['guild'];
 	$characters = $playerData['characters'];
-	//$ships = $playerData['ships'];
+	$ships = $playerData['ships'];
 
 	ob_start();
 	include 'bataillon/templates/player.php';
@@ -112,4 +119,41 @@ function character($name, $charArray) {
 	}
 
 	return '<tr><td class="">' . $name .'</td><td class="'.$rarityClass.'">' . $char['rarity'] .'</td><td class="'.$levelClass.'">' . $char['level'] .'</td><td class="'.$gearClass.'">' . $char['gear_level'] .'</td><td class="'.$readyClass.'">'.($readyClass === 'ready' ? 'yes' : 'no').'</td></tr>'."\n";
+}
+
+function ship($name, $shipArray) {
+	$rarityClass = '';
+
+	$char = [
+		'rarity' => 0,
+		'level' => 0,
+		'gear_level' => 0,
+	];
+
+	if (isset($shipArray[$name])) {
+		$char = $shipArray[$name];
+	}
+
+	if ($char['rarity'] == 7) {
+		$rarityClass = 'ready';
+	} elseif ($char['rarity'] < 5) {
+		$rarityClass = 'notReady';
+	} else {
+		$rarityClass = 'usable';
+	}
+
+	if ($char['level'] > 80) {
+		$levelClass = 'ready';
+	} elseif ($char['level'] < 60) {
+		$levelClass = 'notReady';
+	} else {
+		$levelClass = 'usable';
+	}
+
+	$readyClass = in_array('notReady', [$rarityClass, $levelClass]) ? 'notReady' : 'usable';
+	if ($rarityClass === 'ready' && $levelClass === 'ready') {
+		$readyClass = 'ready';
+	}
+
+	return '<tr><td class="">' . $name .'</td><td class="'.$rarityClass.'">' . $char['rarity'] .'</td><td class="'.$levelClass.'">' . $char['level'] .'</td><td class="'.$readyClass.'">'.($readyClass === 'ready' ? 'yes' : 'no').'</td></tr>'."\n";
 }
