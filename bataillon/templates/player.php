@@ -245,6 +245,26 @@
 			</tbody>
 		</table>
 
+		<h6>P2 - Phoenix</h6>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Character</th>
+				<th>Star</th>
+				<th>Level</th>
+				<th>Gear</th>
+				<th>Ready?</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php echo character('Hera Syndulla', $characters); ?>
+			<?php echo character('Garazeb "Zeb" Orrelios', $characters); ?>
+			<?php echo character('Ezra Bridger', $characters); ?>
+			<?php echo character('Sabine Wren', $characters); ?>
+			<?php echo character('Kanan Jarrus', $characters); ?>
+			</tbody>
+		</table>
+
 		<h6>P2 - Imperial Trooper</h6>
 		<table class="table">
 			<thead>
@@ -262,6 +282,26 @@
 			<?php echo character('Death Trooper', $characters); ?>
 			<?php echo character('Shoretrooper', $characters); ?>
 			<?php echo character('Colonel Starck', $characters); ?>
+			</tbody>
+		</table>
+
+		<h6>P2 - Sith</h6>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Character</th>
+				<th>Star</th>
+				<th>Level</th>
+				<th>Gear</th>
+				<th>Ready?</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php echo heroicCharacter('Emperor Palpatine', $characters); ?>
+			<?php echo heroicCharacter('Darth Vader', $characters); ?>
+			<?php echo heroicCharacter('Darth Nihilus', $characters); ?>
+			<?php echo heroicCharacter('Darth Sion', $characters); ?>
+			<?php echo heroicCharacter('Grand Admiral Thrawn', $characters); ?>
 			</tbody>
 		</table>
 

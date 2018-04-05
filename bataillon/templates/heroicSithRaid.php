@@ -3,7 +3,7 @@
 
 	<div class="col-3">
 		<h5>Phase 1</h5>
-		<h6>P1 / P4 - JTR (R2 or Visas Marr)</h6>
+		<h6>JTR (R2 or Visas Marr or Barriss)</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -17,14 +17,15 @@
 			<tbody>
 			<?php echo heroicCharacter('Rey (Jedi Training)', $characters); ?>
 			<?php echo heroicCharacter('BB-8', $characters); ?>
+			<?php echo heroicCharacter('Resistance Trooper', $characters); ?>
+			<?php echo heroicCharacter('Rey (Scavenger)', $characters); ?>
 			<?php echo heroicCharacter('R2-D2', $characters); ?>
 			<?php echo heroicCharacter('Visas Marr', $characters); ?>
-			<?php echo heroicCharacter('Rey (Scavenger)', $characters); ?>
-			<?php echo heroicCharacter('Resistance Trooper', $characters); ?>
+			<?php echo heroicCharacter('Barriss Offee', $characters); ?>
 			</tbody>
 		</table>
 
-		<h6>P1 - Detonators</h6>
+		<h6>Detonators</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -48,7 +49,7 @@
 	<div class="col-3">
 		<h5>Phase 2</h5>
 
-		<h6>P2 - CLS</h6>
+		<h6>CLS (Ezra oder Leia)</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -65,10 +66,31 @@
 			<?php echo heroicCharacter('Scarif Rebel Pathfinder', $characters); ?>
 			<?php echo heroicCharacter('Sabine Wren', $characters); ?>
 			<?php echo heroicCharacter('Ezra Bridger', $characters); ?>
+			<?php echo heroicCharacter('Princess Leia', $characters); ?>
 			</tbody>
 		</table>
 
-		<h6>P2 - Imperial Trooper</h6>
+		<h6>Phoenix</h6>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Character</th>
+				<th>Star</th>
+				<th>Level</th>
+				<th>Gear</th>
+				<th>Ready?</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php echo character('Hera Syndulla', $characters); ?>
+			<?php echo character('Garazeb "Zeb" Orrelios', $characters); ?>
+			<?php echo character('Ezra Bridger', $characters); ?>
+			<?php echo character('Sabine Wren', $characters); ?>
+			<?php echo character('Kanan Jarrus', $characters); ?>
+			</tbody>
+		</table>
+
+		<h6>Imperial Trooper</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -88,12 +110,32 @@
 			</tbody>
 		</table>
 
+		<h6>Sith</h6>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Character</th>
+				<th>Star</th>
+				<th>Level</th>
+				<th>Gear</th>
+				<th>Ready?</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php echo heroicCharacter('Emperor Palpatine', $characters); ?>
+			<?php echo heroicCharacter('Darth Vader', $characters); ?>
+			<?php echo heroicCharacter('Darth Nihilus', $characters); ?>
+			<?php echo heroicCharacter('Darth Sion', $characters); ?>
+			<?php echo heroicCharacter('Grand Admiral Thrawn', $characters); ?>
+			</tbody>
+		</table>
+
 	</div>
 
 	<div class="col-3">
 		<h5>Phase 3</h5>
 
-		<h6>P3 - CLS (Pao or Sabine)</h6>
+		<h6>CLS (Pao or Sabine)</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -119,7 +161,29 @@
 	<div class="col-3">
 		<h5>Phase 4</h5>
 
-		<h6>P4 - First Order</h6>
+		<h6>JTR (R2 or Visas Marr or Barris)</h6>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Character</th>
+				<th>Star</th>
+				<th>Level</th>
+				<th>Gear</th>
+				<th>Ready?</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php echo heroicCharacter('Rey (Jedi Training)', $characters); ?>
+			<?php echo heroicCharacter('BB-8', $characters); ?>
+			<?php echo heroicCharacter('Rey (Scavenger)', $characters); ?>
+			<?php echo heroicCharacter('Resistance Trooper', $characters); ?>
+			<?php echo heroicCharacter('R2-D2', $characters); ?>
+			<?php echo heroicCharacter('Visas Marr', $characters); ?>
+			<?php echo heroicCharacter('Barriss Offee', $characters); ?>
+			</tbody>
+		</table>
+
+		<h6>First Order</h6>
 		<table class="table">
 			<thead>
 			<tr>
@@ -139,7 +203,7 @@
 			</tbody>
 		</table>
 
-		<h6>P4 - Nightsisters</h6>
+		<h6>Nightsisters</h6>
 		<table class="table">
 			<thead>
 			<tr>

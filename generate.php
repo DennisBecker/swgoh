@@ -85,7 +85,7 @@ file_put_contents('bataillon/index.html', ob_get_clean());
 $html = $sithRaid;
 ob_start();
 include 'bataillon/templates/index.php';
-file_put_contents('bataillon/sith/index.html', ob_get_clean());
+file_put_contents('bataillon/sith.html', ob_get_clean());
 
 function character($name, $charArray) {
 	$rarityClass = '';
