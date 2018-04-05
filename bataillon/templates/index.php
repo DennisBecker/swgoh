@@ -10,7 +10,7 @@
 <div class="p-3">
 	<h1>BΛ - Bataillon Navigator</h1>
 	<h2>Last updated
-		<time>2018-04-04</time>
+		<time>2018-04-05</time>
 	</h2>
 
 	<?php echo $html; ?>

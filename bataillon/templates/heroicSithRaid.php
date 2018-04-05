@@ -82,11 +82,11 @@
 			</tr>
 			</thead>
 			<tbody>
-			<?php echo character('Hera Syndulla', $characters); ?>
-			<?php echo character('Garazeb "Zeb" Orrelios', $characters); ?>
-			<?php echo character('Ezra Bridger', $characters); ?>
-			<?php echo character('Sabine Wren', $characters); ?>
-			<?php echo character('Kanan Jarrus', $characters); ?>
+			<?php echo heroicCharacter('Hera Syndulla', $characters); ?>
+			<?php echo heroicCharacter('Garazeb "Zeb" Orrelios', $characters); ?>
+			<?php echo heroicCharacter('Ezra Bridger', $characters); ?>
+			<?php echo heroicCharacter('Sabine Wren', $characters); ?>
+			<?php echo heroicCharacter('Kanan Jarrus', $characters); ?>
 			</tbody>
 		</table>
 
