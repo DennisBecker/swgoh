@@ -11,4 +11,10 @@
 	<td><?php echo hasChar('Colonel Starck', $characters); ?></td>
 	<td><?php echo hasChar('Shoretrooper', $characters); ?></td>
 	<td><?php echo hasChar('Death Trooper', $characters); ?></td>
+	<td><?php echo hasChar('Grand Admiral Thrawn', $characters); ?></td>
+	<td>&nbsp;</td>
+	<td><?php echo hasShip('Home One', $ships); ?></td>
+	<td><?php echo hasShip('Endurance', $ships); ?></td>
+	<td><?php echo hasShip('Executrix', $ships); ?></td>
+	<td><?php echo hasShip('Chimaera', $ships); ?></td>
 </tr>
