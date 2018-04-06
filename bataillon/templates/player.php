@@ -1,6 +1,5 @@
 <div class="row">
 	<h4 class="col-12"><?php echo $playerName; ?> - <?php echo $guild; ?></h4>
-
 	<div class="col-3">
 		<h5>Characters of Interest</h5>
 		<table class="table">

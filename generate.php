@@ -60,9 +60,41 @@ foreach ($guilds as $name) {
 	};
 }
 
+function isCharReady($name, $characters) {
+	$output = '%s: %s';
+
+	$icon = '<span class="oi oi-x red"></span>';
+
+	if (isset($characters[$name]) && $characters[$name]['level'] === 85 && $characters[$name]['gear_level'] >= 8 && $characters[$name]['rarity'] === 7) {
+		$icon = '<span class="oi oi-check green"></span>';
+	}
+
+	return sprintf($output, $name, $icon);
+}
+
+$overviewHeader = '<tr>
+<th>Name</th>
+<th>CLS</th>
+<th>RJT</th>
+<th>Vet Han</th>
+<th>Vet Chewie</th>
+<th>CHS</th>
+<th>HRSc</th>
+<th>HRSo</th>
+<th>Veers</th>
+<th>Starck</th>
+<th>Shore</th>
+<th>DT</th>
+</tr>';
+
 $html = '';
 $sithRaid = '';
+$overview = $overviewHeader;
+
+$count = 0;
 foreach ($players as $playerName => $playerData) {
+	$count++;
+
 	$guild = $playerData['guild'];
 	$characters = $playerData['characters'];
 	$ships = $playerData['ships'];
@@ -76,6 +108,15 @@ foreach ($players as $playerName => $playerData) {
 	include 'bataillon/templates/heroicSithRaid.php';
 	$playerHtml = ob_get_clean();
 	$sithRaid .= $playerHtml;
+
+	if ($count % 10 === 0) {
+		$overview .= $overviewHeader;
+	}
+
+	ob_start();
+	include 'bataillon/templates/overviewPlayer.php';
+	$playerHtml = ob_get_clean();
+	$overview .= $playerHtml;
 }
 
 ob_start();
@@ -86,6 +127,20 @@ $html = $sithRaid;
 ob_start();
 include 'bataillon/templates/index.php';
 file_put_contents('bataillon/sith.html', ob_get_clean());
+
+$html = $overview;
+ob_start();
+include 'bataillon/templates/overview.php';
+file_put_contents('bataillon/overview.html', ob_get_clean());
+
+function hasChar($name, $charArray) {
+	if (isset($charArray[$name])) {
+		return 'L' . $charArray[$name]['level'] . ' ' . $charArray[$name]['rarity'] . '* G' . $charArray[$name]['gear_level'] . ' <span class="oi oi-check green"></span>';
+	}
+
+	return '<span class="oi oi-x red"></span>';
+}
+
 
 function character($name, $charArray) {
 	$rarityClass = '';

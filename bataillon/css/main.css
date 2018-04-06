@@ -2,6 +2,18 @@ body {
 	font-size: 11px;
 }
 
+th {
+	background-color: rgb(200, 200, 200);
+}
+
+.green {
+	color: rgb(135, 220, 103);
+}
+
+.red {
+	color: rgb(224, 125, 134);
+}
+
 .ready {
 	background-color: rgb(135, 220, 103);
 }
