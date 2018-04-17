@@ -60,6 +60,125 @@ foreach ($guilds as $name) {
 	};
 }
 
+$csvHeader = [
+	'Member',
+	'Guild',
+	'Rey (Jedi Training)',
+	'Veteran Smuggler Han Solo',
+	'Veteran Smuggler Chewbacca',
+	'BB-8',
+	'R2-D2',
+	'Resistance Trooper',
+	'Commander Luke Skywalker',
+	'Han Solo',
+	'Captain Han Solo',
+	'Hoth Rebel Scout',
+	'Hoth Rebel Soldier',
+	'Pao',
+	'General Veers',
+	'Colonel Starck',
+	'Shoretrooper',
+	'Death Trooper',
+	'Snowtrooper',
+	'Grand Admiral Thrawn',
+	'Chirrut Îmwe',
+	'Baze Malbus',
+	'Asajj Ventress',
+	'Mother Talzin',
+	'Old Daka',
+	'Talia',
+	'Nightsister Acolyte',
+	'Nightsister Zombie',
+	'Home One',
+	'Endurance',
+	'Executrix',
+	'Chimaera',
+];
+$group1 = include_once 'bataillon/group1.php';
+$playersGroup1 = [];
+$playersGroup2 = [];
+// BUILD CSV
+foreach ($players as $playerName => $playerData) {
+
+	$characters = $playerData['characters'];
+	$ships = $playerData['ships'];
+
+	$playerRow = [
+		getUnitLevel('Rey (Jedi Training)', $characters),
+		getUnitLevel('Veteran Smuggler Han Solo', $characters),
+		getUnitLevel('Veteran Smuggler Chewbacca', $characters),
+		getUnitLevel('BB-8', $characters),
+		getUnitLevel('R2-D2', $characters),
+		getUnitLevel('Resistance Trooper', $characters),
+		getUnitLevel('Commander Luke Skywalker', $characters),
+		getUnitLevel('Han Solo', $characters),
+		getUnitLevel('Captain Han Solo', $characters),
+		getUnitLevel('Hoth Rebel Scout', $characters),
+		getUnitLevel('Hoth Rebel Soldier', $characters),
+		getUnitLevel('Pao', $characters),
+		getUnitLevel('General Veers', $characters),
+		getUnitLevel('Colonel Starck', $characters),
+		getUnitLevel('Shoretrooper', $characters),
+		getUnitLevel('Death Trooper', $characters),
+		getUnitLevel('Snowtrooper', $characters),
+		getUnitLevel('Grand Admiral Thrawn', $characters),
+		getUnitLevel('Chirrut Îmwe', $characters),
+		getUnitLevel('Baze Malbus', $characters),
+		getUnitLevel('Asajj Ventress', $characters),
+		getUnitLevel('Mother Talzin', $characters),
+		getUnitLevel('Old Daka', $characters),
+		getUnitLevel('Talia', $characters),
+		getUnitLevel('Nightsister Acolyte', $characters),
+		getUnitLevel('Nightsister Zombie', $characters),
+		getUnitLevel('Home One', $ships),
+		getUnitLevel('Endurance', $ships),
+		getUnitLevel('Executrix', $ships),
+		getUnitLevel('Chimaera', $ships),
+	];
+
+	$playerRow[] = array_sum($playerRow);
+	array_unshift($playerRow, $playerData['guild']);
+	array_unshift($playerRow, $playerName);
+
+	if (in_array($playerName, $group1)) {
+		$playersGroup1[] = $playerRow;
+	} else {
+		$playersGroup2[] = $playerRow;
+	}
+}
+
+$playerNamesGroup1 = array_column($playersGroup1, 0);
+usort($playersGroup1, function($a, $b) {
+	return $b[31] <=> $a[31];
+});
+
+array_unshift($playersGroup1, $csvHeader);
+array_unshift($playersGroup2, $csvHeader);
+
+$handle = fopen('bataillon/group1.csv', "w+");
+foreach ($playersGroup1 as $row) {
+	fputcsv($handle, $row);
+}
+fclose($handle);
+
+$handle = fopen('bataillon/group2.csv', "w+");
+foreach ($playersGroup2 as $row) {
+	fputcsv($handle, $row);
+}
+fclose($handle);
+
+//var_dump($playersGroup1);
+var_dump(count($playersGroup1));
+die();
+
+function getUnitLevel($name, $units) {
+	if (isset($units[$name])) {
+		return $units[$name]['rarity'];
+	}
+
+	return 0;
+}
+
 function isCharReady($name, $characters) {
 	$output = '%s: %s';
 
