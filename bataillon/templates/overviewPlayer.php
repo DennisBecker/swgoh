@@ -5,6 +5,7 @@
 	<td><?php echo hasChar('Veteran Smuggler Chewbacca', $characters); ?></td>
 	<td><?php echo hasChar('BB-8', $characters); ?></td>
 	<td><?php echo hasChar('R2-D2', $characters); ?></td>
+	<td><?php echo hasChar('Resistance Trooper', $characters); ?></td>
 	<td><?php echo hasChar('Commander Luke Skywalker', $characters); ?></td>
 	<td><?php echo hasChar('Han Solo', $characters); ?></td>
 	<td><?php echo hasChar('Captain Han Solo', $characters); ?></td>

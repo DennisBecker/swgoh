@@ -79,6 +79,7 @@ $overviewHeader = '<tr>
 <th>Vet Chewie</th>
 <th>BB-8</th>
 <th>R2-D2</th>
+<th>RT</th>
 <th>CLS</th>
 <th>Han</th>
 <th>CHS</th>
