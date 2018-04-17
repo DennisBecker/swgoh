@@ -23,6 +23,7 @@
 	<td><?php echo hasChar('Asajj Ventress', $characters); ?></td>
 	<td><?php echo hasChar('Mother Talzin', $characters); ?></td>
 	<td><?php echo hasChar('Old Daka', $characters); ?></td>
+	<td><?php echo hasChar('Talia', $characters); ?></td>
 	<td><?php echo hasChar('Nightsister Acolyte', $characters); ?></td>
 	<td><?php echo hasChar('Nightsister Zombie', $characters); ?></td>
 	<td>&nbsp;</td>

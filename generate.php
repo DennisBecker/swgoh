@@ -97,6 +97,7 @@ $overviewHeader = '<tr>
 <th>Asajj</th>
 <th>Talzin</th>
 <th>Daka</th>
+<th>Talia</th>
 <th>Acolyte</th>
 <th>Zombie</th>
 <th>&nbsp</th>
@@ -154,7 +155,7 @@ file_put_contents('bataillon/overview.html', ob_get_clean());
 
 function hasChar($name, $charArray) {
 	if (isset($charArray[$name])) {
-		return 'L' . $charArray[$name]['level'] . ' ' . $charArray[$name]['rarity'] . '* G' . $charArray[$name]['gear_level'] . ' <span class="oi oi-check green"></span>';
+		return 'L' . $charArray[$name]['level'] . '<br>' . $charArray[$name]['rarity'] . '*<br>G' . $charArray[$name]['gear_level'];
 	}
 
 	return '<span class="oi oi-x red"></span>';
@@ -162,7 +163,7 @@ function hasChar($name, $charArray) {
 
 function hasShip($name, $charArray) {
 	if (isset($charArray[$name])) {
-		return 'L' . $charArray[$name]['level'] . ' ' . $charArray[$name]['rarity'] . '* <span class="oi oi-check green"></span>';
+		return 'L' . $charArray[$name]['level'] . '<br>' . $charArray[$name]['rarity'] . '*';
 	}
 
 	return '<span class="oi oi-x red"></span>';
