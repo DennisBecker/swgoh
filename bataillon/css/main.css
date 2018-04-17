@@ -6,6 +6,30 @@ th {
 	background-color: rgb(200, 200, 200);
 }
 
+table {
+	overflow: hidden;
+}
+
+tr:hover {
+	background-color: #ffa;
+}
+
+td, th {
+	position: relative;
+}
+
+td:hover::after,
+th:hover::after {
+	content: "";
+	position: absolute;
+	background-color: #ffa;
+	left: 0;
+	top: -5000px;
+	height: 10000px;
+	width: 100%;
+	z-index: -1;
+}
+
 .green {
 	color: rgb(135, 220, 103);
 }

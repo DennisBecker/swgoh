@@ -11,6 +11,7 @@
 	<td><?php echo hasChar('Captain Han Solo', $characters); ?></td>
 	<td><?php echo hasChar('Hoth Rebel Scout', $characters); ?></td>
 	<td><?php echo hasChar('Hoth Rebel Soldier', $characters); ?></td>
+	<td><?php echo hasChar('Pao', $characters); ?></td>
 	<td><?php echo hasChar('General Veers', $characters); ?></td>
 	<td><?php echo hasChar('Colonel Starck', $characters); ?></td>
 	<td><?php echo hasChar('Shoretrooper', $characters); ?></td>

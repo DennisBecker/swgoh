@@ -85,6 +85,7 @@ $overviewHeader = '<tr>
 <th>CHS</th>
 <th>HRSc</th>
 <th>HRSo</th>
+<th>Pao</th>
 <th>Veers</th>
 <th>Starck</th>
 <th>Shore</th>
