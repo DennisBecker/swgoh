@@ -74,10 +74,13 @@ function isCharReady($name, $characters) {
 
 $overviewHeader = '<tr>
 <th>Name</th>
-<th>CLS</th>
 <th>RJT</th>
 <th>Vet Han</th>
 <th>Vet Chewie</th>
+<th>BB-8</th>
+<th>R2-D2</th>
+<th>CLS</th>
+<th>Han</th>
 <th>CHS</th>
 <th>HRSc</th>
 <th>HRSo</th>
@@ -85,7 +88,15 @@ $overviewHeader = '<tr>
 <th>Starck</th>
 <th>Shore</th>
 <th>DT</th>
+<th>Snowtrooper</th>
 <th>Thrawn</th>
+<th>Chirrut</th>
+<th>Baze</th>
+<th>Asajj</th>
+<th>Talzin</th>
+<th>Daka</th>
+<th>Acolyte</th>
+<th>Zombie</th>
 <th>&nbsp</th>
 <th>Home One</th>
 <th>Endurance</th>
