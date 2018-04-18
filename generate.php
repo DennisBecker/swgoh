@@ -167,10 +167,6 @@ foreach ($playersGroup2 as $row) {
 }
 fclose($handle);
 
-//var_dump($playersGroup1);
-var_dump(count($playersGroup1));
-die();
-
 function getUnitLevel($name, $units) {
 	if (isset($units[$name])) {
 		return $units[$name]['rarity'];
@@ -229,10 +225,15 @@ $overviewHeader = '<tr>
 $html = '';
 $sithRaid = '';
 $overview = $overviewHeader;
+$maximumPlayers = [];
 
 $count = 0;
 foreach ($players as $playerName => $playerData) {
 	$count++;
+
+	if (in_array($playerName, $group1)) {
+        $maximumPlayers[$playerName] = $playerData;
+    }
 
 	$guild = $playerData['guild'];
 	$characters = $playerData['characters'];
@@ -258,6 +259,14 @@ foreach ($players as $playerName => $playerData) {
 	$overview .= $playerHtml;
 }
 
+$guild104thOverview = $overviewHeader;
+foreach ($maximumPlayers as $playerName => $playerData) {
+    ob_start();
+    include 'bataillon/templates/104thOverview.php';
+    $playerHtml = ob_get_clean();
+    $guild104thOverview .= $playerHtml;
+}
+
 ob_start();
 include 'bataillon/templates/index.php';
 file_put_contents('bataillon/index.html', ob_get_clean());
@@ -271,6 +280,22 @@ $html = $overview;
 ob_start();
 include 'bataillon/templates/overview.php';
 file_put_contents('bataillon/overview.html', ob_get_clean());
+
+$html = $guild104thOverview;
+ob_start();
+include 'bataillon/templates/overview.php';
+file_put_contents('bataillon/104th.html', ob_get_clean());
+
+
+function matchesRequirement($name, $units, $neededRarity, $neededGear = null) {
+    if (isset($units[$name]) && $units[$name]['rarity'] >= $neededRarity) {
+        if(is_null($neededGear) || (!is_null($neededGear) && $units[$name]['gear_level'] >= $neededGear)) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 function hasChar($name, $charArray) {
 	if (isset($charArray[$name])) {
