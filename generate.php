@@ -259,8 +259,55 @@ foreach ($players as $playerName => $playerData) {
 	$overview .= $playerHtml;
 }
 
+$overviewHeader = '<tr>
+<th>Name</th>
+<th>RJT</th>
+<th>Vet Han</th>
+<th>Vet Chewie</th>
+<th>BB-8</th>
+<th>R2-D2</th>
+<th>RT</th>
+<th>CLS</th>
+<th>Han</th>
+<th>CHS</th>
+<th>HRSc</th>
+<th>HRSo</th>
+<th>Pao</th>
+<th>Veers</th>
+<th>Starck</th>
+<th>Shore</th>
+<th>DT</th>
+<th>Snowtrooper</th>
+<th>Thrawn</th>
+<th>Chirrut</th>
+<th>Baze</th>
+<th>Asajj</th>
+<th>Talzin</th>
+<th>Daka</th>
+<th>Talia</th>
+<th>Acolyte</th>
+<th>Zombie</th>
+<th>Initiate</th>
+<th>&nbsp</th>
+<th>Home One</th>
+<th>Endurance</th>
+<th>Executrix</th>
+<th>Chimaera</th>
+</tr>';
+
 $guild104thOverview = $overviewHeader;
+$count = 0;
 foreach ($maximumPlayers as $playerName => $playerData) {
+    $count++;
+
+    $guild = $playerData['guild'];
+    $characters = $playerData['characters'];
+    $ships = $playerData['ships'];
+
+    if ($count % 10 === 0) {
+        $guild104thOverview .= $overviewHeader;
+    }
+
     ob_start();
     include 'bataillon/templates/104thOverview.php';
     $playerHtml = ob_get_clean();
@@ -302,7 +349,7 @@ function hasChar($name, $charArray) {
 		return 'L' . $charArray[$name]['level'] . '<br>' . $charArray[$name]['rarity'] . '*<br>G' . $charArray[$name]['gear_level'];
 	}
 
-	return '<span class="oi oi-x red"></span>';
+	return '<span class="oi oi-x"></span>';
 }
 
 function hasShip($name, $charArray) {
@@ -310,7 +357,7 @@ function hasShip($name, $charArray) {
 		return 'L' . $charArray[$name]['level'] . '<br>' . $charArray[$name]['rarity'] . '*';
 	}
 
-	return '<span class="oi oi-x red"></span>';
+	return '<span class="oi oi-x"></span>';
 }
 
 
