@@ -3,7 +3,7 @@
 	<td <?php echo matchesRequirement('Rey (Jedi Training)', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Rey (Jedi Training)', $characters); ?></td>
 	<td <?php echo matchesRequirement('Veteran Smuggler Han Solo', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Veteran Smuggler Han Solo', $characters); ?></td>
 	<td <?php echo matchesRequirement('Veteran Smuggler Chewbacca', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Veteran Smuggler Chewbacca', $characters); ?></td>
-	<td <?php echo matchesRequirement('BB-11', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('BB-11', $characters); ?></td>
+	<td <?php echo matchesRequirement('BB-11', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('BB-8', $characters); ?></td>
 	<td <?php echo matchesRequirement('R2-D2', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('R2-D2', $characters); ?></td>
 	<td <?php echo matchesRequirement('Resistance Trooper', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Resistance Trooper', $characters); ?></td>
 	<td <?php echo matchesRequirement('Commander Luke Skywalker', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Commander Luke Skywalker', $characters); ?></td>
