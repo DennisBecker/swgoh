@@ -7,11 +7,11 @@ $guilds = [
 	'501st Bataillon',
 	'Imperial Bataillon',
 	'104th Bataillon',
-	//'41st Bataillon',
+	'41st Bataillon',
 	'B2TF Bataillon',
 	'Outerrim10 Bataillon',
 	'313th Bataillon',
-	//'43rd Bataillon',
+	'43rd Bataillon',
 	'442nd Bataillon',
 	'18th Bataillon',
 ];
@@ -167,6 +167,10 @@ foreach ($playersGroup2 as $row) {
 }
 fclose($handle);
 
+//var_dump($playersGroup1);
+var_dump(count($playersGroup1));
+die();
+
 function getUnitLevel($name, $units) {
 	if (isset($units[$name])) {
 		return $units[$name]['rarity'];
@@ -267,36 +271,6 @@ $html = $overview;
 ob_start();
 include 'bataillon/templates/overview.php';
 file_put_contents('bataillon/overview.html', ob_get_clean());
-
-$sithRaid = "";
-
-$count = 0;
-foreach ($players as $playerName => $playerData) {
-
-	if ($playerData['guild'] !== '104th Bataillon') {
-		continue;
-	}
-
-	$count++;
-
-	$guild = $playerData['guild'];
-	$characters = $playerData['characters'];
-	$ships = $playerData['ships'];
-
-	if ($count % 10 === 0) {
-		$overview .= $overviewHeader;
-	}
-
-	ob_start();
-	include 'bataillon/templates/heroicSithRaid.php';
-	$playerHtml = ob_get_clean();
-	$sithRaid .= $playerHtml;
-}
-
-$html = $sithRaid;
-ob_start();
-include 'bataillon/templates/overview.php';
-file_put_contents('bataillon/104th.html', ob_get_clean());
 
 function hasChar($name, $charArray) {
 	if (isset($charArray[$name])) {
