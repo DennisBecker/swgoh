@@ -7,11 +7,11 @@ $guilds = [
 	'501st Bataillon',
 	'Imperial Bataillon',
 	'104th Bataillon',
-	'41st Bataillon',
+	//'41st Bataillon',
 	'B2TF Bataillon',
 	'Outerrim10 Bataillon',
 	'313th Bataillon',
-	'43rd Bataillon',
+	//'43rd Bataillon',
 	'442nd Bataillon',
 	'18th Bataillon',
 ];
@@ -231,7 +231,7 @@ $count = 0;
 foreach ($players as $playerName => $playerData) {
 	$count++;
 
-	if (in_array($playerName, $group1)) {
+	if ($playerData['guild'] === '104th Bataillon') {
         $maximumPlayers[$playerName] = $playerData;
     }
 
