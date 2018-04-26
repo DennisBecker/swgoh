@@ -288,11 +288,6 @@ $overviewHeader = '<tr>
 <th>Acolyte</th>
 <th>Zombie</th>
 <th>Initiate</th>
-<th>&nbsp</th>
-<th>Home One</th>
-<th>Endurance</th>
-<th>Executrix</th>
-<th>Chimaera</th>
 </tr>';
 
 $guild104thOverview = $overviewHeader;

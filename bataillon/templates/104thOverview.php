@@ -8,10 +8,7 @@
 	<td <?php echo matchesRequirement('Resistance Trooper', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Resistance Trooper', $characters); ?></td>
 	<td <?php echo matchesRequirement('Commander Luke Skywalker', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Commander Luke Skywalker', $characters); ?></td>
 	<td <?php echo matchesRequirement('Han Solo', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Han Solo', $characters); ?></td>
-	<td <?php echo matchesRequirement('Captain Han Solo', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Captain Han Solo', $characters); ?></td>
-	<td <?php echo matchesRequirement('Hoth Rebel Scout', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Hoth Rebel Scout', $characters); ?></td>
-	<td <?php echo matchesRequirement('Hoth Rebel Soldier', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Hoth Rebel Soldier', $characters); ?></td>
-	<td <?php echo matchesRequirement('Pao', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Pao', $characters); ?></td>
+	<td <?php echo matchesRequirement('Pao', $characters, 7, 8) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Pao', $characters); ?></td>
 	<td <?php echo matchesRequirement('General Veers', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('General Veers', $characters); ?></td>
 	<td <?php echo matchesRequirement('Colonel Starck', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Colonel Starck', $characters); ?></td>
 	<td <?php echo matchesRequirement('Shoretrooper', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Shoretrooper', $characters); ?></td>
@@ -26,10 +23,5 @@
 	<td <?php echo matchesRequirement('Talia', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Talia', $characters); ?></td>
 	<td <?php echo matchesRequirement('Nightsister Acolyte', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Acolyte', $characters); ?></td>
 	<td <?php echo matchesRequirement('Nightsister Zombie', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Zombie', $characters); ?></td>
-	<td <?php echo matchesRequirement('Nightsister Initiate', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Zombie', $characters); ?></td>
-	<td>&nbsp;</td>
-	<td <?php echo matchesRequirement('Home One', $ships, 6) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasShip('Home One', $ships); ?></td>
-	<td <?php echo matchesRequirement('Endurance', $ships, 6) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasShip('Endurance', $ships); ?></td>
-	<td <?php echo matchesRequirement('Executrix', $ships, 6) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasShip('Executrix', $ships); ?></td>
-	<td <?php echo matchesRequirement('Chimaera', $ships, 6) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasShip('Chimaera', $ships); ?></td>
+	<td <?php echo matchesRequirement('Nightsister Initiate', $characters, 7, 8) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Zombie', $characters); ?></td>
 </tr>
