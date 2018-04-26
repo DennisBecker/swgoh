@@ -167,10 +167,6 @@ foreach ($playersGroup2 as $row) {
 }
 fclose($handle);
 
-//var_dump($playersGroup1);
-var_dump(count($playersGroup1));
-die();
-
 function getUnitLevel($name, $units) {
 	if (isset($units[$name])) {
 		return $units[$name]['rarity'];
@@ -229,10 +225,15 @@ $overviewHeader = '<tr>
 $html = '';
 $sithRaid = '';
 $overview = $overviewHeader;
+$maximumPlayers = [];
 
 $count = 0;
 foreach ($players as $playerName => $playerData) {
 	$count++;
+
+	if (in_array($playerName, $group1)) {
+        $maximumPlayers[$playerName] = $playerData;
+    }
 
 	$guild = $playerData['guild'];
 	$characters = $playerData['characters'];
@@ -258,6 +259,61 @@ foreach ($players as $playerName => $playerData) {
 	$overview .= $playerHtml;
 }
 
+$overviewHeader = '<tr>
+<th>Name</th>
+<th>RJT</th>
+<th>Vet Han</th>
+<th>Vet Chewie</th>
+<th>BB-8</th>
+<th>R2-D2</th>
+<th>RT</th>
+<th>CLS</th>
+<th>Han</th>
+<th>CHS</th>
+<th>HRSc</th>
+<th>HRSo</th>
+<th>Pao</th>
+<th>Veers</th>
+<th>Starck</th>
+<th>Shore</th>
+<th>DT</th>
+<th>Snowtrooper</th>
+<th>Thrawn</th>
+<th>Chirrut</th>
+<th>Baze</th>
+<th>Asajj</th>
+<th>Talzin</th>
+<th>Daka</th>
+<th>Talia</th>
+<th>Acolyte</th>
+<th>Zombie</th>
+<th>Initiate</th>
+<th>&nbsp</th>
+<th>Home One</th>
+<th>Endurance</th>
+<th>Executrix</th>
+<th>Chimaera</th>
+</tr>';
+
+$guild104thOverview = $overviewHeader;
+$count = 0;
+foreach ($maximumPlayers as $playerName => $playerData) {
+    $count++;
+
+    $guild = $playerData['guild'];
+    $characters = $playerData['characters'];
+    $ships = $playerData['ships'];
+
+    if ($count % 10 === 0) {
+        $guild104thOverview .= $overviewHeader;
+    }
+
+    ob_start();
+    include 'bataillon/templates/104thOverview.php';
+    $playerHtml = ob_get_clean();
+    $guild104thOverview .= $playerHtml;
+}
+
 ob_start();
 include 'bataillon/templates/index.php';
 file_put_contents('bataillon/index.html', ob_get_clean());
@@ -272,12 +328,28 @@ ob_start();
 include 'bataillon/templates/overview.php';
 file_put_contents('bataillon/overview.html', ob_get_clean());
 
+$html = $guild104thOverview;
+ob_start();
+include 'bataillon/templates/overview.php';
+file_put_contents('bataillon/104th.html', ob_get_clean());
+
+
+function matchesRequirement($name, $units, $neededRarity, $neededGear = null) {
+    if (isset($units[$name]) && $units[$name]['rarity'] >= $neededRarity) {
+        if(is_null($neededGear) || (!is_null($neededGear) && $units[$name]['gear_level'] >= $neededGear)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function hasChar($name, $charArray) {
 	if (isset($charArray[$name])) {
 		return 'L' . $charArray[$name]['level'] . '<br>' . $charArray[$name]['rarity'] . '*<br>G' . $charArray[$name]['gear_level'];
 	}
 
-	return '<span class="oi oi-x red"></span>';
+	return '<span class="oi oi-x"></span>';
 }
 
 function hasShip($name, $charArray) {
@@ -285,7 +357,7 @@ function hasShip($name, $charArray) {
 		return 'L' . $charArray[$name]['level'] . '<br>' . $charArray[$name]['rarity'] . '*';
 	}
 
-	return '<span class="oi oi-x red"></span>';
+	return '<span class="oi oi-x"></span>';
 }
 
 
