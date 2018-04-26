@@ -269,9 +269,6 @@ $overviewHeader = '<tr>
 <th>RT</th>
 <th>CLS</th>
 <th>Han</th>
-<th>CHS</th>
-<th>HRSc</th>
-<th>HRSo</th>
 <th>Pao</th>
 <th>Veers</th>
 <th>Starck</th>
