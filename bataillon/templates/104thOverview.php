@@ -23,5 +23,5 @@
 	<td <?php echo matchesRequirement('Talia', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Talia', $characters); ?></td>
 	<td <?php echo matchesRequirement('Nightsister Acolyte', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Acolyte', $characters); ?></td>
 	<td <?php echo matchesRequirement('Nightsister Zombie', $characters, 7, 11) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Zombie', $characters); ?></td>
-	<td <?php echo matchesRequirement('Nightsister Initiate', $characters, 7, 8) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Zombie', $characters); ?></td>
+	<td <?php echo matchesRequirement('Nightsister Initiate', $characters, 7, 8) ? 'class="ready"' : 'class="notReady"'; ?>><?php echo hasChar('Nightsister Initiate', $characters); ?></td>
 </tr>
